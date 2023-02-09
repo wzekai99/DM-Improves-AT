@@ -1,2 +1,100 @@
-# Diffusion-Models-Improve-AT
-Code for the paper "Better Diffusion Models Further Improve Adversarial Training"
+# Better Diffusion Models Further Improve Adversarial Training
+
+
+
+## Environment settings and libraries we used in our experiments
+
+This project is tested under the following environment settings:
+- OS: Ubuntu 20.04.3
+- GPU: NVIDIA A100
+- Cuda: 11.1, Cudnn: v8.2
+- Python: 3.9.5
+- PyTorch: 1.8.0
+- Torchvision: 0.9.0
+
+## Acknowledgement
+The codes are modifed based on the [PyTorch implementation](https://github.com/imrahulr/adversarial_robustness_pytorch) of [Rebuffi et al., 2021](https://arxiv.org/abs/2103.01946).
+
+## Requirements
+
+- Install or download [AutoAttack](https://github.com/fra31/auto-attack):
+```
+pip install git+https://github.com/fra31/auto-attack
+```
+
+- Install or download [RandAugment](https://github.com/ildoonet/pytorch-randaugment):
+```
+pip install git+https://github.com/ildoonet/pytorch-randaugment
+```
+
+- Download EDM generated data. Since 20M and 50M data files are too large, we split them into several parts:
+
+| dataset | size | link |
+|---|:---:|:---:|
+| CIFAR-10 | 1M | [npz](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_ddpm.npz) |
+| CIFAR-10 | 5M | [npz](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_ddpm.npz) |
+| CIFAR-10 | 10M | [npz](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_ddpm.npz) |
+| CIFAR-10 | 20M | [part1](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_ddpm.npz) [part2](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_ddpm.npz) |
+| CIFAR-10 | 50M | [part1](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_ddpm.npz) [part2](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_ddpm.npz) [part3](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_ddpm.npz) [part4](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_ddpm.npz) |
+| CIFAR-100 | 1M | [npz](https://storage.googleapis.com/dm-adversarial-robustness/cifar100_ddpm.npz) |
+| CIFAR-100 | 50M | [part1](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_ddpm.npz) [part2](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_ddpm.npz) [part3](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_ddpm.npz) [part4](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_ddpm.npz) |
+
+- Merge 20M and 50M generated data: 
+  
+```
+python merge_data.py
+```
+
+## Training Commands
+
+Run [`train-wa.py`](./train-wa.py) for reproducing the results reported in the papers. For example, train a WideResNet-28-10 model via [TRADES](https://github.com/yaodongyu/TRADES) on CIFAR-10 with the additional generated data provided by EDM ([Karras et al., 2022](https://github.com/NVlabs/edm)):
+
+```python
+python train-wa.py --data-dir 'cifar-data' \
+    --log-dir 'trained_models' \
+    --desc 'WRN28-10Swish_cifar10s_lr0p2_TRADES5_epoch400_bs512_fraction0p7_ls0p1' \
+    --data cifar10s \
+    --batch-size 512 \
+    --model wrn-28-10-swish \
+    --num-adv-epochs 400 \
+    --lr 0.2 \
+    --beta 5.0 \
+    --unsup-fraction 0.7 \
+    --aux-data-filename <path_to_additional_data> \
+    --ls 0.1
+```
+
+
+
+## Downloading models
+
+We provide checkpoints which  Download a model from links listed in the following table. Clean and robust accuracies are measured on the full test set. The robust accuracy is measured using [AutoAttack](https://github.com/fra31/auto-attack).
+
+| dataset | norm | radius | architecture | clean | robust | link |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| CIFAR-10 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-28-10 | 92.44% | 67.31% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
+| CIFAR-10 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-70-16 | 93.25% | 70.69% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn70-16_with.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
+| CIFAR-10 | &#8467;<sub>2</sub> | 128 / 255 | WRN-28-10 | 95.16% | 83.63% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_l2_wrn70-16_with.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
+| CIFAR-10 | &#8467;<sub>2</sub> | 128 / 255 | WRN-70-16 | 95.54% | 84.86% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_l2_wrn70-16_without.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
+| CIFAR-100 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-28-10 | 72.58% | 38.83% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar100_linf_wrn70-16_with.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
+| CIFAR-100 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-70-16 | 75.22% | 42.67% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar100_linf_wrn70-16_without.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
+
+- **Downloading `checkpoint` to `trained_models/mymodel/weights-best.pt`**
+- **Downloading `argtxt` to `trained_models/mymodel/args.txt`**
+
+## Evaluation Commands
+The trained models can be evaluated by running [`eval-aa.py`](./eval-aa.py) which uses [AutoAttack](https://github.com/fra31/auto-attack) for evaluating the robust accuracy. Run the command:
+
+```python
+python eval-aa.py --data-dir 'cifar-data' \
+    --log-dir 'trained_models' \
+    --desc mymodel
+```
+
+To evaluate the model on last epoch under AutoAttack, run the command: 
+
+```python
+python eval-last-aa.py --data-dir 'cifar-data' \
+    --log-dir 'trained_models' \
+    --desc mymodel
+```
