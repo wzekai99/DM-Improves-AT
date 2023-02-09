@@ -42,7 +42,7 @@ pip install git+https://github.com/ildoonet/pytorch-randaugment
 - Merge 20M and 50M generated data: 
   
 ```
-python merge_data.py
+python merge-data.py
 ```
 
 ## Training Commands
