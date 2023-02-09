@@ -27,7 +27,7 @@ pip install git+https://github.com/fra31/auto-attack
 pip install git+https://github.com/ildoonet/pytorch-randaugment
 ```
 
-- Download EDM generated data. Since 20M and 50M data files are too large, we split them into several parts:
+- Download EDM generated data to `edm_data`. Since 20M and 50M data files are too large, we split them into several parts:
 
 | dataset | size | link |
 |---|:---:|:---:|
@@ -47,7 +47,7 @@ python merge_data.py
 
 ## Training Commands
 
-Run [`train-wa.py`](./train-wa.py) for reproducing the results reported in the papers. For example, train a WideResNet-28-10 model via [TRADES](https://github.com/yaodongyu/TRADES) on CIFAR-10 with the additional generated data provided by EDM ([Karras et al., 2022](https://github.com/NVlabs/edm)):
+Run [`train-wa.py`](./train-wa.py) for reproducing the results reported in the papers. For example, train a WideResNet-28-10 model via [TRADES](https://github.com/yaodongyu/TRADES) on CIFAR-10 with the 1M additional generated data provided by EDM ([Karras et al., 2022](https://github.com/NVlabs/edm)):
 
 ```python
 python train-wa.py --data-dir 'cifar-data' \
@@ -60,7 +60,7 @@ python train-wa.py --data-dir 'cifar-data' \
     --lr 0.2 \
     --beta 5.0 \
     --unsup-fraction 0.7 \
-    --aux-data-filename <path_to_additional_data> \
+    --aux-data-filename 'edm_data/1m.npz' \
     --ls 0.1
 ```
 
@@ -70,14 +70,15 @@ python train-wa.py --data-dir 'cifar-data' \
 
 We provide checkpoints which  Download a model from links listed in the following table. Clean and robust accuracies are measured on the full test set. The robust accuracy is measured using [AutoAttack](https://github.com/fra31/auto-attack).
 
-| dataset | norm | radius | architecture | clean | robust | link |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| CIFAR-10 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-28-10 | 92.44% | 67.31% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
-| CIFAR-10 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-70-16 | 93.25% | 70.69% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn70-16_with.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
-| CIFAR-10 | &#8467;<sub>2</sub> | 128 / 255 | WRN-28-10 | 95.16% | 83.63% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_l2_wrn70-16_with.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
-| CIFAR-10 | &#8467;<sub>2</sub> | 128 / 255 | WRN-70-16 | 95.54% | 84.86% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_l2_wrn70-16_without.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
-| CIFAR-100 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-28-10 | 72.58% | 38.83% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar100_linf_wrn70-16_with.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
-| CIFAR-100 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-70-16 | 75.22% | 42.67% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar100_linf_wrn70-16_without.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
+| dataset | size | link |
+|---|:---:|:---:|
+| CIFAR-10 | 1M | [npz](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/1m.npz) |
+| CIFAR-10 | 5M | [npz](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/5m.npz) |
+| CIFAR-10 | 10M | [npz](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/10m_ran0.npz) |
+| CIFAR-10 | 20M | [part1](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/20m_part1.npz) [part2](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/20m_part2.npz) |
+| CIFAR-10 | 50M | [part1](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/50m_part1.npz) [part2](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/50m_part2.npz) [part3](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/50m_part3.npz) [part4](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/50m_part4.npz) |
+| CIFAR-100 | 1M | [npz](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar100/1m.npz) |
+| CIFAR-100 | 50M | [part1](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar100/50m_part1.npz) [part2](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar100/50m_part2.npz) [part3](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar100/50m_part3.npz) [part4](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar100/50m_part4.npz) |
 
 - **Downloading `checkpoint` to `trained_models/mymodel/weights-best.pt`**
 - **Downloading `argtxt` to `trained_models/mymodel/args.txt`**
@@ -96,5 +97,5 @@ To evaluate the model on last epoch under AutoAttack, run the command:
 ```python
 python eval-last-aa.py --data-dir 'cifar-data' \
     --log-dir 'trained_models' \
-    --desc mymodel
+    --desc <path to checkpoint of last epoch>
 ```
