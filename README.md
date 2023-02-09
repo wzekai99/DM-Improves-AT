@@ -27,7 +27,7 @@ pip install git+https://github.com/fra31/auto-attack
 pip install git+https://github.com/ildoonet/pytorch-randaugment
 ```
 
-- Download EDM generated data to `edm_data`. Since 20M and 50M data files are too large, we split them into several parts:
+- Download EDM generated data to `./edm_data/cifar10` and `./edm_data/cifar100`. Since 20M and 50M data files are too large, we split them into several parts:
 
 | dataset | size | link |
 |---|:---:|:---:|
@@ -60,35 +60,17 @@ python train-wa.py --data-dir 'cifar-data' \
     --lr 0.2 \
     --beta 5.0 \
     --unsup-fraction 0.7 \
-    --aux-data-filename 'edm_data/1m.npz' \
+    --aux-data-filename 'edm_data/cifar10/1m.npz' \
     --ls 0.1
 ```
 
-
-
-## Downloading models
-
-We provide checkpoints which  Download a model from links listed in the following table. Clean and robust accuracies are measured on the full test set. The robust accuracy is measured using [AutoAttack](https://github.com/fra31/auto-attack).
-
-| dataset | norm | radius | architecture | clean | robust | link |
-|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| CIFAR-10 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-28-10 | 92.44% | 67.31% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
-| CIFAR-10 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-70-16 | 93.25% | 70.69% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn70-16_with.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
-| CIFAR-10 | &#8467;<sub>2</sub> | 128 / 255 | WRN-28-10 | 95.16% | 83.63% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_l2_wrn70-16_with.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
-| CIFAR-10 | &#8467;<sub>2</sub> | 128 / 255 | WRN-70-16 | 95.54% | 84.86% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_l2_wrn70-16_without.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
-| CIFAR-100 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-28-10 | 72.58% | 38.83% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar100_linf_wrn70-16_with.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
-| CIFAR-100 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-70-16 | 75.22% | 42.67% | [checkpoint](https://storage.googleapis.com/dm-adversarial-robustness/cifar100_linf_wrn70-16_without.pt) [argtxt](https://storage.googleapis.com/dm-adversarial-robustness/cifar10_linf_wrn28-10_with.pt)
-
-- **Downloading `checkpoint` to `trained_models/mymodel/weights-best.pt`**
-- **Downloading `argtxt` to `trained_models/mymodel/args.txt`**
-
 ## Evaluation Commands
-The trained models can be evaluated by running [`eval-aa.py`](./eval-aa.py) which uses [AutoAttack](https://github.com/fra31/auto-attack) for evaluating the robust accuracy. Run the command:
+The trained models can be evaluated by running [`eval-aa.py`](./eval-aa.py) which uses [AutoAttack](https://github.com/fra31/auto-attack) for evaluating the robust accuracy. Run the command (taking the checkpoint above as an example):
 
 ```python
 python eval-aa.py --data-dir 'cifar-data' \
     --log-dir 'trained_models' \
-    --desc mymodel
+    --desc 'WRN28-10Swish_cifar10s_lr0p2_TRADES5_epoch400_bs512_fraction0p7_ls0p1'
 ```
 
 To evaluate the model on last epoch under AutoAttack, run the command: 
@@ -96,5 +78,29 @@ To evaluate the model on last epoch under AutoAttack, run the command:
 ```python
 python eval-last-aa.py --data-dir 'cifar-data' \
     --log-dir 'trained_models' \
-    --desc <path to checkpoint of last epoch>
+    --desc 'WRN28-10Swish_cifar10s_lr0p2_TRADES5_epoch400_bs512_fraction0p7_ls0p1'
+```
+
+
+## Pre-trained checkpoints
+
+
+We provide the state-of-the-art pre-trained checkpoints of WRN-28-10 (Swish) and WRN-70-16 (Swish). Clean and robust accuracies are measured on the full test set. The robust accuracy is measured using [AutoAttack](https://github.com/fra31/auto-attack).
+
+| dataset | norm | radius | architecture | clean | robust | link |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| CIFAR-10 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-28-10 | 92.44% | 67.31% | [checkpoint](https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/checkpoint/cifar10_linf_wrn28-10.pt) [argtxt](https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/argtxt/cifar10_linf_wrn28-10.txt)
+| CIFAR-10 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-70-16 | 93.25% | 70.69% | [checkpoint](https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/checkpoint/cifar10_linf_wrn70-16.pt) [argtxt](https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/argtxt/cifar10_linf_wrn70-16.txt)
+| CIFAR-10 | &#8467;<sub>2</sub> | 128 / 255 | WRN-28-10 | 95.16% | 83.63% | [checkpoint](https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/checkpoint/cifar10_l2_wrn28-10.pt) [argtxt](https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/argtxt/cifar10_l2_wrn28-10.txt)
+| CIFAR-10 | &#8467;<sub>2</sub> | 128 / 255 | WRN-70-16 | 95.54% | 84.86% | [checkpoint](https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/checkpoint/cifar100_l2_wrn70-16.pt) [argtxt](https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/argtxt/cifar100_l2_wrn70-16.txt)
+| CIFAR-100 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-28-10 | 72.58% | 38.83% | [checkpoint](https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/checkpoint/cifar100_linf_wrn28-10.pt) [argtxt](https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/argtxt/cifar100_linf_wrn28-10.txt)
+| CIFAR-100 | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-70-16 | 75.22% | 42.67% | [checkpoint](https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/checkpoint/cifar100_linf_wrn70-16.pt) [argtxt](https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/argtxt/cifar100_linf_wrn70-16.txt)
+
+- **Downloading `checkpoint` to `trained_models/mymodel/weights-best.pt`**
+- **Downloading `argtxt` to `trained_models/mymodel/args.txt`**
+  
+For evaluation under AutoAttack, run the command:
+
+```python
+python eval-aa.py --data-dir 'cifar-data' --log-dir 'trained_models' --desc 'mymodel'
 ```
