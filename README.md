@@ -35,7 +35,7 @@ pip install git+https://github.com/ildoonet/pytorch-randaugment
 |---|:---:|:---:|
 | CIFAR-10 | 1M | [npz](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/1m.npz) |
 | CIFAR-10 | 5M | [npz](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/5m.npz) |
-| CIFAR-10 | 10M | [npz](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/10m_ran0.npz) |
+| CIFAR-10 | 10M | [npz](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/10m.npz) |
 | CIFAR-10 | 20M | [part1](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/20m_part1.npz) [part2](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/20m_part2.npz) |
 | CIFAR-10 | 50M | [part1](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/50m_part1.npz) [part2](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/50m_part2.npz) [part3](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/50m_part3.npz) [part4](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar10/50m_part4.npz) |
 | CIFAR-100 | 1M | [npz](https://huggingface.co/datasets/P2333/DM-Improves-AT/resolve/main/cifar100/1m.npz) |
