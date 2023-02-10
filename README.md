@@ -1,5 +1,7 @@
 # Better Diffusion Models Further Improve Adversarial Training
 
+Code for the paper [Better Diffusion Models Further Improve Adversarial Training](https://arxiv.org/pdf/2302.04638.pdf).
+
 
 
 ## Environment settings and libraries we used in our experiments
@@ -13,7 +15,7 @@ This project is tested under the following environment settings:
 - Torchvision: 0.9.0
 
 ## Acknowledgement
-The codes are modifed based on the [PyTorch implementation](https://github.com/imrahulr/adversarial_robustness_pytorch) of [Rebuffi et al., 2021](https://arxiv.org/abs/2103.01946).
+The adversarial training codes are modifed based on the [PyTorch implementation](https://github.com/imrahulr/adversarial_robustness_pytorch) of [Rebuffi et al., 2021](https://arxiv.org/abs/2103.01946). The generation codes are modifed based on the [official implementation of EDM](https://github.com/NVlabs/edm).
 
 ## Requirements
 
