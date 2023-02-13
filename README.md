@@ -15,17 +15,17 @@ This project is tested under the following environment settings:
 - Torchvision: 0.9.0
 
 ## Acknowledgement
-The adversarial training codes are modifed based on the [PyTorch implementation](https://github.com/imrahulr/adversarial_robustness_pytorch) of [Rebuffi et al., 2021](https://arxiv.org/abs/2103.01946). The generation codes are modifed based on the [official implementation of EDM](https://github.com/NVlabs/edm).
+The adversarial training codes are modifed based on the [PyTorch implementation](https://github.com/imrahulr/adversarial_robustness_pytorch) of [Rebuffi et al., 2021](https://arxiv.org/abs/2103.01946). The generation codes are modifed based on the [official implementation of EDM](https://github.com/NVlabs/edm). For data generation, please refer to `edm/README.md` for more details.  
 
 ## Requirements
 
 - Install or download [AutoAttack](https://github.com/fra31/auto-attack):
-```
+```.bash
 pip install git+https://github.com/fra31/auto-attack
 ```
 
 - Install or download [RandAugment](https://github.com/ildoonet/pytorch-randaugment):
-```
+```.bash
 pip install git+https://github.com/ildoonet/pytorch-randaugment
 ```
 
@@ -51,7 +51,7 @@ python merge-data.py
 
 Run [`train-wa.py`](./train-wa.py) for reproducing the results reported in the papers. For example, train a WideResNet-28-10 model via [TRADES](https://github.com/yaodongyu/TRADES) on CIFAR-10 with the 1M additional generated data provided by EDM ([Karras et al., 2022](https://github.com/NVlabs/edm)):
 
-```python
+```.bash
 python train-wa.py --data-dir 'cifar-data' \
     --log-dir 'trained_models' \
     --desc 'WRN28-10Swish_cifar10s_lr0p2_TRADES5_epoch400_bs512_fraction0p7_ls0p1' \
@@ -69,7 +69,7 @@ python train-wa.py --data-dir 'cifar-data' \
 ## Evaluation Commands
 The trained models can be evaluated by running [`eval-aa.py`](./eval-aa.py) which uses [AutoAttack](https://github.com/fra31/auto-attack) for evaluating the robust accuracy. Run the command (taking the checkpoint above as an example):
 
-```python
+```.bash
 python eval-aa.py --data-dir 'cifar-data' \
     --log-dir 'trained_models' \
     --desc 'WRN28-10Swish_cifar10s_lr0p2_TRADES5_epoch400_bs512_fraction0p7_ls0p1'
@@ -77,7 +77,7 @@ python eval-aa.py --data-dir 'cifar-data' \
 
 To evaluate the model on last epoch under AutoAttack, run the command: 
 
-```python
+```.bash
 python eval-last-aa.py --data-dir 'cifar-data' \
     --log-dir 'trained_models' \
     --desc 'WRN28-10Swish_cifar10s_lr0p2_TRADES5_epoch400_bs512_fraction0p7_ls0p1'
@@ -103,6 +103,6 @@ We provide the state-of-the-art pre-trained checkpoints of WRN-28-10 (Swish) and
   
 For evaluation under AutoAttack, run the command:
 
-```python
+```.bash
 python eval-aa.py --data-dir 'cifar-data' --log-dir 'trained_models' --desc 'mymodel'
 ```
