@@ -1,6 +1,6 @@
 # Data Generation
 
-The generation codes are modifed based on the [official implementation of EDM](https://github.com/NVlabs/edm) and [PyTorch implementation](https://github.com/yaircarmon/semisup-adv) of [Carmon et al., 2019](https://arxiv.org/abs/1905.13736). We employ the class-conditional EDM in this implementation. 
+The generation codes are modifed based on the [official implementation of EDM](https://github.com/NVlabs/edm) and [official implementation](https://github.com/yaircarmon/semisup-adv) of [Carmon et al., 2019](https://arxiv.org/abs/1905.13736). We employ the class-conditional EDM in this implementation. 
 
 
 ## Requirements
@@ -11,7 +11,7 @@ The generation codes are modifed based on the [official implementation of EDM](h
 - Python libraries: See [environment.yml](./environment.yml) for exact library dependencies. You can use the following commands with Miniconda3 to create and activate your Python environment:
   - `conda env create -f environment.yml -n edm`
   - `conda activate edm`
-- For 1M data generation, we use the [PyTorch implementation](https://github.com/yaircarmon/semisup-adv) of [Carmon et al., 2019](https://arxiv.org/abs/1905.13736) to train WRN-28-10 models to give pseudo-labels, following [Rebuffi et al., 2021](https://arxiv.org/abs/2103.01946). Download selection models to `./selection_model`. 
+- For 1M data generation, we use the [official implementation](https://github.com/yaircarmon/semisup-adv) of [Carmon et al., 2019](https://arxiv.org/abs/1905.13736) to train WRN-28-10 models to give pseudo-labels, following [Rebuffi et al., 2021](https://arxiv.org/abs/2103.01946). Download selection models to `./selection_model`. 
 
 | dataset | clean | link |
 |---|:---:|---|
@@ -67,4 +67,4 @@ python combine_data.py --data_dir ./cifar100_out --output_dir ./cifar100_npz --c
 
 ## License
 
-Source code and pre-trained models of EDM are licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/). [PyTorch implementation](https://github.com/yaircarmon/semisup-adv) of [Carmon et al., 2019](https://arxiv.org/abs/1905.13736) is originally shared under the [MIT license](https://github.com/openai/guided-diffusion/blob/main/LICENSE). 
+Source code and pre-trained models of EDM are licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/). [Official implementation](https://github.com/yaircarmon/semisup-adv) of [Carmon et al., 2019](https://arxiv.org/abs/1905.13736) is originally shared under the [MIT license](https://github.com/yaircarmon/semisup-adv/blob/master/LICENSE.md). 
