@@ -15,7 +15,7 @@ This project is tested under the following environment settings:
 - Torchvision: 0.9.0
 
 ## Acknowledgement
-The adversarial training codes are modifed based on the [PyTorch implementation](https://github.com/imrahulr/adversarial_robustness_pytorch) of [Rebuffi et al., 2021](https://arxiv.org/abs/2103.01946). The generation codes are modifed based on the [official implementation of EDM](https://github.com/NVlabs/edm). For data generation, please refer to [`edm/README.md`](edm/README.md) for more details.  
+The adversarial training codes are modifed based on the [PyTorch implementation](https://github.com/imrahulr/adversarial_robustness_pytorch) of [Rebuffi et al., 2021](https://arxiv.org/abs/2103.01946). The generation codes are modifed based on the [official implementation of EDM](https://github.com/NVlabs/edm). For data generation, please refer to [`edm/README.md`](./edm) for more details.  
 
 ## Requirements
 
