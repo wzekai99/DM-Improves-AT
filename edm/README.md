@@ -31,7 +31,7 @@ torchrun --standalone --nproc_per_node=4 generate.py --outdir=out_cifar10 --seed
     --network=https://nvlabs-fi-cdn.nvidia.com/edm/pretrained/edm-cifar10-32x32-cond-vp.pkl
 ```
 
-The name of `.npy` file indicates the label of images in the file, e.g., `1.npy`. Then, we use the pre-trained WRN-28-10 model to score each image and select the top 100K images for each class: 
+The name of `.npy` file indicates the label of images in the file, e.g., `1.npy`. We use the pre-trained WRN-28-10 model to score each image and select the top 100K images for each class: 
 
 ```.bash
 python select_1M.py --model_path ./selection_model/cifar10_pseudo.pt --data_dir ./cifar10_out --output_dir ./cifar10_npz --class_num 10
