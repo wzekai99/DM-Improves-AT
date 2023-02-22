@@ -106,3 +106,13 @@ For evaluation under AutoAttack, run the command:
 ```.bash
 python eval-aa.py --data-dir 'cifar-data' --log-dir 'trained_models' --desc 'mymodel'
 ```
+
+## Citing this work
+```
+@article{wang2023better,
+  title={Better Diffusion Models Further Improve Adversarial Training},
+  author={Wang, Zekai and Pang, Tianyu and Du, Chao and Lin, Min and Liu, Weiwei and Yan, Shuicheng},
+  journal={arXiv preprint arXiv:2302.04638},
+  year={2023}
+}
+```
