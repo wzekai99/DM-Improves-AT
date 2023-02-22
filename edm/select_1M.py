@@ -59,14 +59,15 @@ final_images = []
 final_targets = [] 
 
 for class_iter in range(args.class_num):
-    data = np.load(os.path.join(args.data_dir, str(class_iter)+'.npy'))
+    print(f'processing {class_iter}-th class')
 
+    data = np.load(os.path.join(args.data_dir, str(class_iter)+'.npy'))
     unlabeled_data = CIFAR10('../cifar-data', train=False, transform=ToTensor())
     unlabeled_data.data = data
     unlabeled_data.targets = [class_iter for _ in range(unlabeled_data.data.shape[0])]
     data_loader = torch.utils.data.DataLoader(unlabeled_data,
                                             batch_size=args.batch_size,
-                                            num_workers=100,
+                                            num_workers=4,
                                             pin_memory=True)
 
     # Running model on unlabeled data

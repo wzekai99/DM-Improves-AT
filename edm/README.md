@@ -34,13 +34,13 @@ torchrun --standalone --nproc_per_node=4 generate.py --outdir=out_cifar10 --seed
 The name of `.npy` file indicates the label of images in the file, e.g., `1.npy`. We use the pre-trained WRN-28-10 model to score each image and select the top 100K images for each class: 
 
 ```.bash
-python select_1M.py --model_path ./selection_model/cifar10_pseudo.pt --data_dir ./cifar10_out --output_dir ./cifar10_npz --class_num 10
+python select_1M.py --model_path ./selection_model/cifar10_pseudo.pt --data_dir ./out_cifar10 --output_dir ./npz_cifar10 --class_num 10
 ```
 
 When the amount of required generated data exceeds 1M, we merge `.npy` data files without selection. For example, generate 5M data:
 
 ```.bash
-python combine_data.py --data_dir ./cifar10_out --output_dir ./cifar10_npz --class_num 10 --file_name 5m
+python combine_data.py --data_dir ./out_cifar10 --output_dir ./npz_cifar10 --class_num 10 --file_name 5m
 ```
 
 ## Generating data for CIFAR-100
@@ -56,13 +56,13 @@ torchrun --standalone --nproc_per_node=4 generate.py --outdir=out_cifar100 --see
 We use the pre-trained WRN-28-10 model to score each image and select the top 10K images for each class: 
 
 ```.bash
-python select_1M.py --model_path ./selection_model/cifar100_pseudo.pt --data_dir ./cifar100_out --output_dir ./cifar100_npz --class_num 100
+python select_1M.py --model_path ./selection_model/cifar100_pseudo.pt --data_dir ./out_cifar100 --output_dir ./npz_cifar100 --class_num 100
 ```
 
 When the amount of required generated data exceeds 1M, we merge `.npy` data files without selection. For example, generate 5M data:
 
 ```.bash
-python combine_data.py --data_dir ./cifar100_out --output_dir ./cifar100_npz --class_num 100 --file_name 5m
+python combine_data.py --data_dir ./out_cifar100 --output_dir ./npz_cifar100 --class_num 100 --file_name 5m
 ```
 
 ## License
