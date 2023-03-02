@@ -45,5 +45,8 @@ class SemiSupervisedSVHN(SemiSupervisedDatasetSVHN):
     """
     def load_base_dataset(self, train=False, **kwargs):
         assert self.base_dataset == 'svhn', 'Only semi-supervised SVHN is supported. Please use correct dataset!'
-        self.dataset = torchvision.datasets.SVHN(split='train', **kwargs)
+        if train:
+            self.dataset = torchvision.datasets.SVHN(split='train', **kwargs)
+        else:
+            self.dataset = torchvision.datasets.SVHN(split='test', **kwargs)
         self.dataset_size = len(self.dataset)

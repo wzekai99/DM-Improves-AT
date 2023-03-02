@@ -69,6 +69,7 @@ class SemiSupervisedDataset(torch.utils.data.Dataset):
                     # for data from Rebuffi et al, 2021.
                     aux = np.load(aux_path)
                     aux_data = aux['image']
+                    print(aux_data.shape)
                     aux_targets = aux['label']
                 
                 orig_len = len(self.data)
@@ -165,6 +166,7 @@ class SemiSupervisedDatasetSVHN(torch.utils.data.Dataset):
                     # for data from Rebuffi et al, 2021.
                     aux = np.load(aux_path)
                     aux_data = aux['image']
+                    print(aux_data.shape)
                     aux_targets = aux['label']
 
                 orig_len = len(self.data)
