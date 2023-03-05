@@ -9,13 +9,13 @@ import numpy as np
 from .semisup import SemiSupervisedDataset
 
 
-def load_cifar100s(data_dir, use_augmentation=False, aux_take_amount=None, 
+def load_cifar100s(data_dir, use_augmentation='base', use_consistency=False, aux_take_amount=None, 
                    aux_data_filename=None, validation=False):
     """
     Returns semisupervised CIFAR100 train, test datasets and dataloaders (with DDPM Images).
     Arguments:
         data_dir (str): path to data directory.
-        use_augmentation (bool): whether to use augmentations for training set.
+        use_augmentation (base/none): whether to use augmentations for training set.
         aux_take_amount (int): number of semi-supervised examples to use (if None, use all).
         aux_data_filename (str): path to additional data pickle file.
     Returns:
@@ -23,7 +23,7 @@ def load_cifar100s(data_dir, use_augmentation=False, aux_take_amount=None,
     """
     data_dir = re.sub('cifar100s', 'cifar100', data_dir)
     test_transform = transforms.Compose([transforms.ToTensor()])
-    if use_augmentation:
+    if use_augmentation == 'base':
         train_transform = transforms.Compose([transforms.RandomCrop(32, padding=4), transforms.RandomHorizontalFlip(0.5), 
                                               transforms.RandomRotation(15), transforms.ToTensor()])
     else: 

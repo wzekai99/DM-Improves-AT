@@ -13,12 +13,12 @@ DATA_DESC = {
 }
 
 
-def load_svhn(data_dir, use_augmentation=False):
+def load_svhn(data_dir, use_augmentation='base'):
     """
     Returns SVHN train, test datasets and dataloaders.
     Arguments:
         data_dir (str): path to data directory.
-        use_augmentation (bool): whether to use augmentations for training set.
+        use_augmentation (base/none): whether to use augmentations for training set.
     Returns:
         train dataset, test dataset. 
     """

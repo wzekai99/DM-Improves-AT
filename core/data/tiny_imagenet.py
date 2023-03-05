@@ -15,17 +15,17 @@ DATA_DESC = {
 }
 
 
-def load_tinyimagenet(data_dir, use_augmentation=False):
+def load_tinyimagenet(data_dir, use_augmentation='base'):
     """
     Returns Tiny Imagenet-200 train, test datasets and dataloaders.
     Arguments:
         data_dir (str): path to data directory.
-        use_augmentation (bool): whether to use augmentations for training set.
+        use_augmentation (base/none): whether to use augmentations for training set.
     Returns:
         train dataset, test dataset. 
     """
     test_transform = transforms.Compose([transforms.ToTensor()])
-    if use_augmentation:
+    if use_augmentation == 'base':
         train_transform = transforms.Compose([transforms.RandomCrop(64, padding=4), transforms.RandomHorizontalFlip(), 
                                               transforms.ToTensor()])
     else: 

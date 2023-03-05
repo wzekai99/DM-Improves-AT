@@ -47,7 +47,7 @@ def get_data_info(data_dir):
     return DATA_DESC
 
 
-def load_data(data_dir, batch_size=256, batch_size_test=256, num_workers=4, use_augmentation=False, use_consistency=False, shuffle_train=True, 
+def load_data(data_dir, batch_size=256, batch_size_test=256, num_workers=4, use_augmentation='base', use_consistency=False, shuffle_train=True, 
               aux_data_filename=None, unsup_fraction=None, validation=False):
     """
     Returns train, test datasets and dataloaders.
@@ -56,7 +56,7 @@ def load_data(data_dir, batch_size=256, batch_size_test=256, num_workers=4, use_
         batch_size (int): batch size for training.
         batch_size_test (int): batch size for validation.
         num_workers (int): number of workers for loading the data.
-        use_augmentation (bool): whether to use augmentations for training set.
+        use_augmentation (base/none): whether to use augmentations for training set.
         shuffle_train (bool): whether to shuffle training set.
         aux_data_filename (str): path to unlabelled data.
         unsup_fraction (float): fraction of unlabelled data per batch.

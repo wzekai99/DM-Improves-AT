@@ -56,7 +56,7 @@ def load_cifar10s(data_dir, use_augmentation='base', use_consistency=False, aux_
     Returns semisupervised CIFAR10 train, test datasets and dataloaders (with Tiny Images).
     Arguments:
         data_dir (str): path to data directory.
-        use_augmentation (bool): whether to use augmentations for training set.
+        use_augmentation: use different augmentations for training set.
         aux_take_amount (int): number of semi-supervised examples to use (if None, use all).
         aux_data_filename (str): path to additional data pickle file.
     Returns:
