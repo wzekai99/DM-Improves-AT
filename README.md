@@ -1,6 +1,6 @@
 # Better Diffusion Models Further Improve Adversarial Training
 
-Code for the paper [Better Diffusion Models Further Improve Adversarial Training](https://arxiv.org/pdf/2302.04638.pdf).
+Code for the paper [Better Diffusion Models Further Improve Adversarial Training](https://arxiv.org/pdf/2302.04638.pdf) (ICML 2023).
 
 
 
