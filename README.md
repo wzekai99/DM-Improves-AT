@@ -110,10 +110,10 @@ python eval-aa.py --data-dir 'cifar-data' --log-dir 'trained_models' --desc 'mym
 ## References
 If you find the code useful for your research, please consider citing
 ```bib
-@article{wang2023better,
+@inproceedings{wang2023better,
   title={Better Diffusion Models Further Improve Adversarial Training},
   author={Wang, Zekai and Pang, Tianyu and Du, Chao and Lin, Min and Liu, Weiwei and Yan, Shuicheng},
-  journal={arXiv preprint arXiv:2302.04638},
+  booktitle={International Conference on Machine Learning (ICML)},
   year={2023}
 }
 ```
