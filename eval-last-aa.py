@@ -19,7 +19,6 @@ from autoattack import AutoAttack
 from core.data import get_data_info
 from core.data import load_data
 from core.models import create_model
-
 from core.utils import Logger
 from core.utils import parser_eval
 from core.utils import seed
@@ -42,6 +41,8 @@ elif args.data in ['cifar100', 'cifar100s']:
     da = '/cifar100/'
 elif args.data in ['svhn', 'svhns']:
     da = '/svhn/'
+elif args.data in ['tiny-imagenet', 'tiny-imagenets']:
+    da = '/tiny-imagenet/'
 
 
 DATA_DIR = args.data_dir + da
@@ -49,17 +50,13 @@ WEIGHTS = LOG_DIR + '/weights-last.pt'
 if not os.path.exists(WEIGHTS):
     WEIGHTS = LOG_DIR + '/state-last.pt'
 
-
 log_path = LOG_DIR + '/log-aa-last.log'
 logger = Logger(log_path)
-
 info = get_data_info(DATA_DIR)
-# BATCH_SIZE = args.batch_size
-# BATCH_SIZE_VALIDATION = args.batch_size_validation
+
 BATCH_SIZE = 128
 BATCH_SIZE_VALIDATION = 128
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-
 logger.log('Using device: {}'.format(device))
 
 
@@ -82,7 +79,6 @@ else:
     y_test = torch.cat(l, 0)
 
 
-
 # Model
 print(args.model)
 model = create_model(args.model, args.normalize, info, device)
@@ -92,7 +88,6 @@ if 'tau' in args and args.tau:
 model.load_state_dict(checkpoint['model_state_dict'])
 model.eval()
 del checkpoint
-
 
 
 # AA Evaluation

@@ -50,7 +50,7 @@ For CIFAR-100, we train our own model on four A100 GPUs and select the model wit
 ```.bash
 # Generate 50K images for each class using 4 A100 GPUs, using deterministic sampling with 25 steps
 torchrun --standalone --nproc_per_node=4 generate.py --outdir=out_cifar100 --seeds=0-49999 --batch=2048  --steps=25 --class_num=100 \
-    --network=https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/others/edm-cifar100-cond-32x32-cond-vp.pkl
+    --network=https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/others/edm-cifar100-32x32-cond-vp.pkl
 ```
 
 We use the pre-trained WRN-28-10 model to score each image and select the top 10K images for each class: 
@@ -63,6 +63,22 @@ When the amount of required generated data exceeds 1M, we merge `.npy` data file
 
 ```.bash
 python combine_data.py --data_dir ./out_cifar100 --output_dir ./npz_cifar100 --class_num 100 --file_name 5m
+```
+
+## Generating data for SVHN
+
+For SVHN, we train our own model on four A100 GPUs and select the model with the best FID (1.39) after 25 sampling steps. Unlike CIFAR-10/CIFAR-100 generation, the data for SVHN is generated without selection by a pre-trained model. For instance, for 1M data generation, we first generate 10K images for each class and 1M in total: 
+
+```.bash
+# Generate 50K images for each class using 4 A100 GPUs, using deterministic sampling with 25 steps
+torchrun --standalone --nproc_per_node=4 generate.py --outdir=out_svhn --seeds=0-99999 --batch=2048  --steps=25 --class_num=10 \
+    --network=https://huggingface.co/wzekai99/DM-Improves-AT/resolve/main/others/edm-svhn-32x32-cond-vp.pkl
+```
+
+Then we merge `.npy` data files without selection: 
+
+```.bash
+python combine_data.py --data_dir ./out_svhn --output_dir ./npz_svhn --class_num 10 --file_name 1m
 ```
 
 ## License

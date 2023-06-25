@@ -7,6 +7,7 @@ from .wideresnet import wideresnet
 
 from .preact_resnetwithswish import preact_resnetwithswish
 from .wideresnetwithswish import wideresnetwithswish
+from .ti_wideresnetwithswish import ti_wideresnetwithswish
 
 from core.data import DATASETS
 
@@ -29,12 +30,14 @@ def create_model(name, normalize, info, device):
     Returns:
         torch.nn.Module.
     """
-    if info['data'] in ['tiny-imagenet']:
-        assert 'preact-resnet' in name, 'Only preact-resnets are supported for this dataset!'
-        from .ti_preact_resnet import ti_preact_resnet
-        backbone = ti_preact_resnet(name, num_classes=info['num_classes'], device=device)
+    if info['data'] in ['tiny-imagenet', 'tiny-imagenets']:
+        if 'wrn' in name and 'swish' in name:
+            backbone = ti_wideresnetwithswish(name, num_classes=info['num_classes'], device=device)
+        else:
+            from .ti_preact_resnet import ti_preact_resnet
+            backbone = ti_preact_resnet(name, num_classes=info['num_classes'], device=device)
     
-    elif info['data'] in DATASETS and info['data'] not in ['tiny-imagenet']:
+    elif info['data'] in DATASETS and info['data'] not in ['tiny-imagenet', 'tiny-imagenets']:
         if 'preact-resnet' in name and 'swish' not in name:
             backbone = preact_resnet(name, num_classes=info['num_classes'], pretrained=False, device=device)
         elif 'preact-resnet' in name and 'swish' in name:

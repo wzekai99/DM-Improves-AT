@@ -8,11 +8,12 @@ from .cifar10s import load_cifar10s
 from .cifar100s import load_cifar100s
 from .svhns import load_svhns
 from .tiny_imagenet import load_tinyimagenet
+from .tiny_imagenets import load_tinyimagenets
 
 from .semisup import get_semisup_dataloaders
 
 
-SEMISUP_DATASETS = ['cifar10s', 'cifar100s', 'svhns']
+SEMISUP_DATASETS = ['cifar10s', 'cifar100s', 'svhns', 'tiny-imagenets']
 DATASETS = ['cifar10', 'svhn', 'cifar100', 'tiny-imagenet'] + SEMISUP_DATASETS
 
 _LOAD_DATASET_FN = {
@@ -23,6 +24,7 @@ _LOAD_DATASET_FN = {
     'cifar10s': load_cifar10s,
     'cifar100s': load_cifar100s,
     'svhns': load_svhns,
+    'tiny-imagenets': load_tinyimagenets,
 }
 
 
