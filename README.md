@@ -90,7 +90,7 @@ python eval-last-aa.py --data-dir 'dataset-data' \
 ## Pre-trained checkpoints
 
 
-We provide the state-of-the-art pre-trained checkpoints of WRN-28-10 (Swish) and WRN-70-16 (Swish). Clean and robust accuracies are measured on the full test set. The robust accuracy is measured using [AutoAttack](https://github.com/fra31/auto-attack).
+We provide the state-of-the-art pre-trained checkpoints of WRN-28-10 (Swish) and WRN-70-16 (Swish). Refer to `argtxt` below for specific hyper-parameters. Clean and robust accuracies are measured on the full test set. The robust accuracy is measured using [AutoAttack](https://github.com/fra31/auto-attack).
 
 | dataset | norm | radius | architecture | clean | robust | link |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -103,17 +103,16 @@ We provide the state-of-the-art pre-trained checkpoints of WRN-28-10 (Swish) and
 | SVHN | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-28-10 | 95.56% | 64.01% | [checkpoint](https://huggingface.co/wzekai99/DM-Improves-AT1/resolve/main/checkpoint/svhn_linf_wrn28-10.pt) [argtxt](https://huggingface.co/wzekai99/DM-Improves-AT1/resolve/main/argtxt/svhn_linf_wrn28-10.txt)
 | TinyImageNet | &#8467;<sub>&infin;</sub> | 8 / 255 | WRN-28-10 | 65.19% | 31.30% | [checkpoint](https://huggingface.co/wzekai99/DM-Improves-AT1/resolve/main/checkpoint/tiny_linf_wrn28-10.pt) [argtxt](https://huggingface.co/wzekai99/DM-Improves-AT1/resolve/main/argtxt/tiny_linf_wrn28-10.txt)
 
-
-- **Downloading `checkpoint` to `trained_models/mymodel/weights-best.pt`**
-- **Downloading `argtxt` to `trained_models/mymodel/args.txt`**
-  
-For evaluation under AutoAttack, run the command:
+For evaluation under AutoAttack: 
+1. Download `checkpoint` to `trained_models/mymodel/weights-best.pt`
+2. Download `argtxt` to `trained_models/mymodel/args.txt`
+3. Run the command:
 
 ```.bash
 python eval-aa.py --data-dir 'dataset-data' --log-dir 'trained_models' --desc 'mymodel'
 ```
 
-We have uploaded CIFAR-10/CIFAR-100 models to the [model zoo](https://github.com/RobustBench/robustbench#model-zoo) of RobustBench. See the [tour](https://github.com/RobustBench/robustbench#model-zoo-quick-tour) to evaluate the performance by RobustBench. 
+We have uploaded CIFAR-10/CIFAR-100 models to the [model zoo](https://github.com/RobustBench/robustbench#model-zoo) of [**RobustBench**](https://robustbench.github.io). See the [tour](https://github.com/RobustBench/robustbench#model-zoo-quick-tour) to evaluate the performance by RobustBench. 
 
 ## References
 If you find the code useful for your research, please consider citing
